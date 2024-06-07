@@ -1,3 +1,75 @@
+@import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
+
+* {
+  box-sizing: border-box;
+  font-family: monospace;
+  /* text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); */
+}
+
+h1,
+h2,
+h3,
+p {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+body,
+.game {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
 body {
   background-color: peru;
+  height: 100vh;
+}
+
+.game {
+  gap: 1rem;
+}
+
+.shop-item-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  gap: 0.5rem;
+  height: 100px;
+  width: 250px;
+  overflow: scroll;
+}
+
+.shop-item-container div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* div {
+  border-style: solid;
+} */
+
+th {
+  text-align: left;
+}
+
+/* Desktop screen size  */
+@media (min-width: 500px) {
+  .game {
+    flex-direction: row;
+  }
 }
