@@ -1,34 +1,84 @@
 // global variable to store the value of the cookies
-let cookieCounter = 0;
-let cps = 0;
 
 // DOM manipulation:
 // cookie counter
 // cps (cookies per second)
 // image to click on
-// select these elements from the DOM or create these elements with JS
+// select these elements from the DOM and store them in variables
+let cookieCountertext = document.querySelector(".cookie-ammount");
+let cpsText = document.querySelector(".cookie-per-second");
+let cookieImg = document.getElementById("cookie-image");
 
 // a way to store the shop items that we get from the API
 let shopItems = [];
 
 // fetch the shop items from the API
 // a way to store the shop items that we get from the API (async, await)
-function getShopItems() {
+async function getShopItems() {
   // fetch the shop items from the API
+  const response = await fetch(
+    "https://cookie-upgrade-api.vercel.app/api/upgrades"
+  );
+
   // turn the data into json
+  const data = await response.json();
+
   // push the items in the shopItems array
+  // ! for some reason the data is pushed into the array on the 0 index rather then populate the array, still can use it but need to use two indexes to get the data
+  shopItems.push(data);
+
+  renderShop();
 }
 
+getShopItems();
+
 // an event listener for clicking on the cookie
-// select the cookie img or button
-// write an event listener
-addEventListener("click", function () {
-  // when I click on the cookie, increment the cookie counter by 1
-  // increment operator(one idea)
+cookieImg.addEventListener("click", function () {
+  // increment the cookie counter by 1
+  gamedata.cookieCounter++;
+  // update the cookie counter text
+  cookieCountertext.textContent = gamedata.cookieCounter;
 });
 
 // have all the game information in one function(object?)
-// you need to check if there are any cookies in the local storage(cookieCounter, cps)
+// game information: cookie counter, cps, shop items
+let gamedata = {
+  cookieCounter: 0,
+  cps: 0,
+  shopItems: [],
+};
+
+// game function
+function game() {
+  // you need to check if there are any cookies in the local storage(cookieCounter, cps)
+
+  // if there are cookies in the local storage, load the game information
+  if (localStorage.getItem("savedGame")) {
+    // load the game information
+    loadGame();
+  }
+  // if there are no cookies in the local storage, start a new game
+  else {
+    resetGame();
+  }
+
+  // load the game information
+  // load the shop items
+  // render the shop items
+  // update the display
+}
+
+function resetGame() {
+  gamedata.cookieCounter = 0;
+  gamedata.cps = 0;
+  gamedata.shopItems = [];
+  cookieCountertext.textContent = gamedata.cookieCounter;
+}
+
+const resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", function () {
+  resetGame();
+});
 // load the game information from the local storage
 // load the game --> loadGame() calls the game function
 // fetch the shop items from the API
@@ -53,8 +103,38 @@ function saveGames() {
   // a method to set the items using key and value in the local storage
 }
 
+const shopTable = document.querySelector("table");
+console.log(shopTable);
+
 function renderShop() {
-  // create DOM elements to display the shop items
-  // can use for loop or array method to iterate over the shopItems array
-  shopItems.forEach(() => {});
+  for (let index = 0; index < shopItems[0].length; index++) {
+    // can use for loop or array method to iterate over the shopItems array
+    // create DOM elements to display the shop items
+    let shopItem = document.createElement("tr");
+    let shopItemName = document.createElement("td");
+    let shopItemCps = document.createElement("td");
+    let shopItemAmmount = document.createElement("td");
+    let shopItemPrice = document.createElement("td");
+    let shopItemButtonBox = document.createElement("td");
+    let shopItemButton = document.createElement("button");
+
+    // set the text content of the elements
+    console.log(shopItems[0][index].name);
+    shopItemName.textContent = shopItems[0][index].name;
+    shopItemCps.textContent = shopItems[0][index].increase;
+    shopItemAmmount.textContent = 0;
+    shopItemPrice.textContent = shopItems[0][index].cost;
+    shopItemButton.textContent = "Buy";
+
+    // append the elements to the shopItem
+    shopItemButtonBox.append(shopItemButton);
+    shopItem.append(
+      shopItemName,
+      shopItemCps,
+      shopItemAmmount,
+      shopItemPrice,
+      shopItemButtonBox
+    );
+    shopTable.append(shopItem);
+  }
 }
