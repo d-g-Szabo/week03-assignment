@@ -9,9 +9,15 @@ let cookieCountertext = document.querySelector(".cookie-ammount");
 let cpsText = document.querySelector(".cookie-per-second");
 let cookieImg = document.getElementById("cookie-image");
 const resetButton = document.getElementById("reset");
+const cheatButton = document.getElementById("cheat");
 
 resetButton.addEventListener("click", function () {
   resetGame();
+});
+
+cheatButton.addEventListener("click", function () {
+  gamedata.cookieCounter = 500000;
+  updateDisplay();
 });
 
 // a way to store the shop items that we get from the API
