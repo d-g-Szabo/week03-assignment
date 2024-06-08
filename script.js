@@ -18,14 +18,12 @@ async function getShopItems() {
 
   // push the items in the shopItems array
   // ! for some reason the data is pushed into the array on the 0 index rather then populate the array, still can use it but need to use two indexes to get the data (shopItems[0][0])
-  shopItems.push(data);
-
-  // call the game function
-  game();
+  await shopItems.push(data);
 }
 
 // game function
-function game() {
+async function game() {
+  await getShopItems();
   // if there are cookies in the local storage, load the game information
   if (localStorage.getItem("savedGame")) {
     // load the game information
@@ -140,7 +138,7 @@ cheatButton.addEventListener("click", function () {
 let shopItems = [];
 
 // call the function to fetch the shop items
-getShopItems();
+game();
 
 // create a table to display the shop items
 // has to be called after the shopItems array is populated
