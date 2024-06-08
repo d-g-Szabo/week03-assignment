@@ -27,7 +27,7 @@ async function getShopItems() {
   // ! for some reason the data is pushed into the array on the 0 index rather then populate the array, still can use it but need to use two indexes to get the data
   shopItems.push(data);
 
-  renderShop();
+  game();
 }
 
 getShopItems();
@@ -37,7 +37,7 @@ cookieImg.addEventListener("click", function () {
   // increment the cookie counter by 1
   gamedata.cookieCounter++;
   // update the cookie counter text
-  cookieCountertext.textContent = gamedata.cookieCounter;
+  updateDisplay();
 });
 
 // have all the game information in one function(object?)
@@ -65,28 +65,33 @@ function game() {
   // load the game information
   // load the shop items
   // render the shop items
+  renderShop();
   // update the display
 }
+
+// load the game information from the local storage
+// load the game --> loadGame() calls the game function
+// fetch the shop items from the API
+// render(display) the shop items on the page
+function loadGame() {}
 
 function resetGame() {
   gamedata.cookieCounter = 0;
   gamedata.cps = 0;
   gamedata.shopItems = [];
-  cookieCountertext.textContent = gamedata.cookieCounter;
+  updateDisplay();
 }
 
 const resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", function () {
   resetGame();
 });
-// load the game information from the local storage
-// load the game --> loadGame() calls the game function
-// fetch the shop items from the API
-// render(display) the shop items on the page
 
 // we need a timer to increase the cookies we get every second (cps)
 setInterval(function () {
   // increase the cookie counter by one every second
+  gamedata.cookieCounter += gamedata.cps;
+  updateDisplay();
   // update the value displayed on the page (or could have this in a separate function to call inside the interv, for example updateCookieCounter())
   // update the value in the local storage (or could have this in a separate function to call inside the interv, for example saveGame())
 }, 1000);
@@ -95,6 +100,10 @@ setInterval(function () {
 
 function updateDisplay() {
   // update the DOM element containing the value of cookie counter
+  cookieCountertext.textContent = gamedata.cookieCounter;
+  // update the DOM element containing the value of cps
+  cpsText.textContent = gamedata.cps;
+
   // update the content value of the cookies from the local storage(current total)
 }
 

@@ -63,8 +63,9 @@ body {
   border-style: solid;
 } */
 
-th {
-  text-align: left;
+th,
+td {
+  text-align: center;
 }
 
 /* Desktop screen size  */
