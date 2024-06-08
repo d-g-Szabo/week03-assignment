@@ -55,6 +55,7 @@ function game() {
   // if there are cookies in the local storage, load the game information
   if (localStorage.getItem("savedGame")) {
     // load the game information
+    // load the shop items
     loadGame();
   }
   // if there are no cookies in the local storage, start a new game
@@ -62,18 +63,22 @@ function game() {
     resetGame();
   }
 
-  // load the game information
-  // load the shop items
   // render the shop items
   renderShop();
   // update the display
+  updateDisplay();
 }
 
 // load the game information from the local storage
 // load the game --> loadGame() calls the game function
 // fetch the shop items from the API
 // render(display) the shop items on the page
-function loadGame() {}
+function loadGame() {
+  // load the game information from the local storage
+  const saveData = localStorage.getItem("savedGame");
+  gamedata = JSON.parse(saveData);
+  // load the shop items
+}
 
 function resetGame() {
   gamedata.cookieCounter = 0;
@@ -91,9 +96,10 @@ resetButton.addEventListener("click", function () {
 setInterval(function () {
   // increase the cookie counter by one every second
   gamedata.cookieCounter += gamedata.cps;
-  updateDisplay();
   // update the value displayed on the page (or could have this in a separate function to call inside the interv, for example updateCookieCounter())
+  updateDisplay();
   // update the value in the local storage (or could have this in a separate function to call inside the interv, for example saveGame())
+  saveGames();
 }, 1000);
 
 // extra tools, if you want to use them to separate different tasks into functions
@@ -109,6 +115,8 @@ function updateDisplay() {
 
 function saveGames() {
   // a method to turn your data into strings
+  const saveData = JSON.stringify(gamedata);
+  localStorage.setItem("savedGame", saveData);
   // a method to set the items using key and value in the local storage
 }
 
