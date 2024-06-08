@@ -109,8 +109,14 @@ function updateDisplay() {
   cookieCountertext.textContent = gamedata.cookieCounter;
   // update the DOM element containing the value of cps
   cpsText.textContent = gamedata.cps;
-
   // update the content value of the cookies from the local storage(current total)
+  for (let index = 0; index < shopItems[0].length; index++) {
+    const shopItemAmmount = document.getElementById(index + 1);
+    // update the ammount of the shop item bought ? if true : if false
+    shopItemAmmount.textContent = gamedata.shopItems[index]
+      ? gamedata.shopItems[index].ammount
+      : 0;
+  }
 }
 
 function saveGames() {
@@ -121,7 +127,6 @@ function saveGames() {
 }
 
 const shopTable = document.querySelector("table");
-console.log(shopTable);
 
 function renderShop() {
   for (let index = 0; index < shopItems[0].length; index++) {
@@ -136,10 +141,10 @@ function renderShop() {
     let shopItemButton = document.createElement("button");
 
     // set the text content of the elements
-    console.log(shopItems[0][index].name);
     shopItemName.textContent = shopItems[0][index].name;
     shopItemCps.textContent = shopItems[0][index].increase;
     shopItemAmmount.textContent = 0;
+    shopItemAmmount.id = shopItems[0][index].id;
     shopItemPrice.textContent = shopItems[0][index].cost;
     shopItemButton.textContent = "Buy";
 
