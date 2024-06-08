@@ -8,6 +8,11 @@
 let cookieCountertext = document.querySelector(".cookie-ammount");
 let cpsText = document.querySelector(".cookie-per-second");
 let cookieImg = document.getElementById("cookie-image");
+const resetButton = document.getElementById("reset");
+
+resetButton.addEventListener("click", function () {
+  resetGame();
+});
 
 // a way to store the shop items that we get from the API
 let shopItems = [];
@@ -86,11 +91,6 @@ function resetGame() {
   gamedata.shopItems = [];
   updateDisplay();
 }
-
-const resetButton = document.getElementById("reset");
-resetButton.addEventListener("click", function () {
-  resetGame();
-});
 
 // we need a timer to increase the cookies we get every second (cps)
 setInterval(function () {
