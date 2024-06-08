@@ -70,14 +70,18 @@ function updateDisplay() {
   cookieCountertext.textContent = gamedata.cookieCounter;
   // update the DOM element containing the value of cps
   cpsText.textContent = gamedata.cps;
-  // update the content value of the cookies from the local storage(current total)
-  for (let index = 0; index < shopItems[0].length; index++) {
-    // get the element that displays the ammount of the shop item bought
-    const shopItemAmmount = document.getElementById(index + 1);
-    // update the ammount of the shop item bought ? if true : if false
-    shopItemAmmount.textContent = gamedata.shopItems[index]
-      ? gamedata.shopItems[index].ammount
-      : 0;
+
+  // if there are shop items bought
+  if (gamedata.shopItems.length > 0) {
+    // update the content value of the cookies from the local storage(current total)
+    for (let index = 0; index < shopItems[0].length; index++) {
+      // get the element that displays the ammount of the shop item bought
+      const shopItemAmmount = document.getElementById(index + 1);
+      // update the ammount of the shop item bought ? if true : if false
+      shopItemAmmount.textContent = gamedata.shopItems[index]
+        ? gamedata.shopItems[index].ammount
+        : 0;
+    }
   }
 }
 
