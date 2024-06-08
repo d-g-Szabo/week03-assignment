@@ -2,7 +2,9 @@
 // game information: cookie counter, cps, shop items
 let gamedata = {
   cookieCounter: 0,
-  cps: 0,
+  // ! I dont like this because it will increment the cookie counter by 1 every second even if the cps is 0, the original cookie counter doesnt work like this, I will leave it here for now just to meet the requirement
+  // increment the cookie counter by 1 every second
+  cps: 1,
   shopItems: [],
 };
 
@@ -51,7 +53,8 @@ function loadGame() {
 function resetGame() {
   // set everything to 0
   gamedata.cookieCounter = 0;
-  gamedata.cps = 0;
+  // ! same here change it back to 0
+  gamedata.cps = 1;
   gamedata.shopItems = [];
   updateDisplay();
 }
