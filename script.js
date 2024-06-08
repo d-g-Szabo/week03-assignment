@@ -155,3 +155,48 @@ function renderShop() {
     shopTable.append(shopItem);
   }
 }
+
+// event listener for buying the shop items
+// shop items should increase the cps
+// shop items should decrease the cookie counter
+// shop items should increase the price (optional) (or could have a fixed price for each item)
+// shop items should increase the amount of items bought
+// shop items should be saved in the local storage
+// shop items should be displayed on the page
+shopTable.addEventListener("click", function (e) {
+  // check if the target of the event is a button
+  if (e.target.tagName === "BUTTON") {
+    // get the index of the shop item that was clicked
+    let index = e.target.parentElement.parentElement.rowIndex - 1;
+    // get the price of the shop item
+    let price = shopItems[0][index].cost;
+    // check if the player has enough cookies to buy the shop item
+    if (gamedata.cookieCounter >= price) {
+      // decrease the cookie counter by the price of the shop item
+      gamedata.cookieCounter -= price;
+      // increase the cps by the value of the shop item
+      gamedata.cps += shopItems[0][index].increase;
+      // increase the amount of the shop item bought
+
+      if (gamedata.shopItems[index]) {
+        gamedata.shopItems[index].ammount++;
+      } else {
+        gamedata.shopItems[index] = {
+          id: shopItems[0][index].id,
+          ammount: 1,
+        };
+      }
+      // ! this is the same as above but with Object.assign and it adds the full object to the array
+      // const shopItemToAdd = Object.assign({}, shopItems[0][index], {
+      //   id: shopItems[0][index].id,
+      //   ammount: 1,
+      // });
+      // gamedata.shopItems.push(shopItemToAdd);
+
+      // update the display
+      updateDisplay();
+      // save the game
+      saveGames();
+    }
+  }
+});
