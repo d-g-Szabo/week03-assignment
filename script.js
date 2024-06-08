@@ -16,7 +16,7 @@ resetButton.addEventListener("click", function () {
 });
 
 cheatButton.addEventListener("click", function () {
-  gamedata.cookieCounter = 500000;
+  gamedata.cookieCounter = 5000000;
   updateDisplay();
 });
 
