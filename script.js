@@ -35,7 +35,7 @@ async function getShopItems() {
   const data = await response.json();
 
   // push the items in the shopItems array
-  // ! for some reason the data is pushed into the array on the 0 index rather then populate the array, still can use it but need to use two indexes to get the data
+  // ! for some reason the data is pushed into the array on the 0 index rather then populate the array, still can use it but need to use two indexes to get the data (shopItems[0][0])
   shopItems.push(data);
 
   game();
