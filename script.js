@@ -82,6 +82,14 @@ function updateDisplay() {
         ? gamedata.shopItems[index].ammount
         : 0;
     }
+  } else if (document.getElementById(1)) {
+    // if there are no shop items bought but there are already rendered ammounts, set the ammount of the shop items to 0
+    for (let index = 0; index < shopItems[0].length; index++) {
+      // get the element that displays the ammount of the shop item bought
+      const shopItemAmmount = document.getElementById(index + 1);
+      // update the ammount of the shop item bought ? if true : if false
+      shopItemAmmount.textContent = 0;
+    }
   }
 }
 
