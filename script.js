@@ -51,6 +51,7 @@ function loadGame() {
 
 // reset the game
 function resetGame() {
+  // set everything to 0
   gamedata.cookieCounter = 0;
   gamedata.cps = 0;
   gamedata.shopItems = [];
@@ -73,6 +74,7 @@ function updateDisplay() {
   cpsText.textContent = gamedata.cps;
   // update the content value of the cookies from the local storage(current total)
   for (let index = 0; index < shopItems[0].length; index++) {
+    // get the element that displays the ammount of the shop item bought
     const shopItemAmmount = document.getElementById(index + 1);
     // update the ammount of the shop item bought ? if true : if false
     shopItemAmmount.textContent = gamedata.shopItems[index]
@@ -81,9 +83,10 @@ function updateDisplay() {
   }
 }
 
+// render the shop items
 function renderShop() {
+  // loop through the shop items
   for (let index = 0; index < shopItems[0].length; index++) {
-    // can use for loop or array method to iterate over the shopItems array
     // create DOM elements to display the shop items
     let shopItem = document.createElement("tr");
     let shopItemName = document.createElement("td");
@@ -114,23 +117,26 @@ function renderShop() {
   }
 }
 
-// select these elements from the DOM and store them in variables
+// select elements from the DOM and store them in variables
 let cookieCountertext = document.querySelector(".cookie-ammount");
 let cpsText = document.querySelector(".cookie-per-second");
 let cookieImg = document.getElementById("cookie-image");
 const resetButton = document.getElementById("reset");
 const cheatButton = document.getElementById("cheat");
 
+// add an event listener to the reset button
 resetButton.addEventListener("click", function () {
   resetGame();
 });
 
+// add an event listener to the cheat button
 cheatButton.addEventListener("click", function () {
+  // set the cookie counter to 5000000 so I can test the shop items
   gamedata.cookieCounter = 5000000;
   updateDisplay();
 });
 
-// a way to store the shop items that we get from the API
+// create an array to store the shop items
 let shopItems = [];
 
 // call the function to fetch the shop items
@@ -148,23 +154,17 @@ cookieImg.addEventListener("click", function () {
   updateDisplay();
 });
 
-// we need a timer to increase the cookies we get every second (cps)
+// create an interval to increase the cookie counter by the cps every second
 setInterval(function () {
-  // increase the cookie counter by one every second
+  // increase the cookie counter by the cps every second
   gamedata.cookieCounter += gamedata.cps;
-  // update the value displayed on the page (or could have this in a separate function to call inside the interv, for example updateCookieCounter())
+  // update the value displayed on the page
   updateDisplay();
-  // update the value in the local storage (or could have this in a separate function to call inside the interv, for example saveGame())
+  // update the value in the local storage
   saveGames();
 }, 1000);
 
 // event listener for buying the shop items
-// shop items should increase the cps
-// shop items should decrease the cookie counter
-// shop items should increase the price (optional) (or could have a fixed price for each item)
-// shop items should increase the amount of items bought
-// shop items should be saved in the local storage
-// shop items should be displayed on the page
 shopTable.addEventListener("click", function (e) {
   // check if the target of the event is a button
   if (e.target.tagName === "BUTTON") {
@@ -180,15 +180,17 @@ shopTable.addEventListener("click", function (e) {
       gamedata.cps += shopItems[0][index].increase;
       // increase the amount of the shop item bought
 
+      // if the shop item is already in the array, increase the amount
       if (gamedata.shopItems[index]) {
         gamedata.shopItems[index].ammount++;
       } else {
+        // if the shop item is not in the array, add it with an amount of 1
         gamedata.shopItems[index] = {
           id: shopItems[0][index].id,
           ammount: 1,
         };
       }
-      // ! this is the same as above but with Object.assign and it adds the full object to the array
+      // ! this is the same as above but with Object.assign and it adds the full object to the array I will leave it here, maybe will be usefull in the future
       // const shopItemToAdd = Object.assign({}, shopItems[0][index], {
       //   id: shopItems[0][index].id,
       //   ammount: 1,
