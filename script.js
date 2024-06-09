@@ -80,7 +80,7 @@ function updateDisplay() {
     for (let index = 0; index < shopItems[0].length; index++) {
       // get the element that displays the ammount of the shop item bought
       const shopItemAmmount = document.getElementById(index + 1);
-      // update the ammount of the shop item bought ? if true : if false
+      // update the ammount of the shop item bought (ternary operator) ? if true : if false
       shopItemAmmount.textContent = gamedata.shopItems[index]
         ? gamedata.shopItems[index].ammount
         : 0;
@@ -90,7 +90,7 @@ function updateDisplay() {
     for (let index = 0; index < shopItems[0].length; index++) {
       // get the element that displays the ammount of the shop item bought
       const shopItemAmmount = document.getElementById(index + 1);
-      // update the ammount of the shop item bought ? if true : if false
+      // update the ammount of the shop item bought
       shopItemAmmount.textContent = 0;
     }
   }
