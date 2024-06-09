@@ -10,6 +10,12 @@ button {
   all: unset;
 }
 
+:focus {
+  border-color: cyan;
+  border-style: solid;
+  border-width: 3px;
+}
+
 header {
   width: 100vw;
   background-color: rgb(41, 40, 40);
