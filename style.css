@@ -10,10 +10,8 @@ button {
   all: unset;
 }
 
-:focus {
-  border-color: cyan;
-  border-style: solid;
-  border-width: 3px;
+:focus-visible {
+  outline: 5px solid seagreen;
 }
 
 header {
@@ -29,6 +27,7 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
+  margin: 3px;
 }
 
 button:hover {
