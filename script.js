@@ -163,6 +163,12 @@ const shopTable = document.querySelector("table");
 cookieImg.addEventListener("click", function () {
   // increment the cookie counter by 1
   gamedata.cookieCounter++;
+  // when the cookie is clicked add animation to css class
+  cookieImg.classList.add("clicked");
+  // remove the animation after 0.25s
+  setTimeout(() => {
+    cookieImg.classList.remove("clicked");
+  }, 250);
   // update the cookie counter text
   updateDisplay();
 });
