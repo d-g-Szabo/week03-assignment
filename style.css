@@ -59,6 +59,24 @@ body {
   align-items: center;
 }
 
+.cookie {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+img {
+  width: 50%;
+  height: auto;
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+
+img:active {
+  transform: scale(0.9);
+  transition-duration: 0.1s;
+}
+
 /* div {
   border-style: solid;
 } */
