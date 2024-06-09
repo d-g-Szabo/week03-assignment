@@ -25,7 +25,7 @@ I met all the requirements for this assignment. I tried to achive a similar look
 
 # Wireframe:
 
-![](https://d-g-szabo.github.io/nft-preview-card-component-main/images/screenshot.jpg)
+![](https://d-g-szabo.github.io/week03-assignment/cookies_clicker_wireframe.jpg)
 
 # Stretch Goals:
 
